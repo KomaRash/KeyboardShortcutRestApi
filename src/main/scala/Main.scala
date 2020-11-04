@@ -20,7 +20,7 @@ object Main extends IOApp{
     service=KeyboardService.service(repository)
     endpoints=KeyboardEndpoints.endpoints(service)
     server <- BlazeServerBuilder[F]
-      .bindHttp(8080,"127.0.0.1")
+      .bindHttp(8081,"127.0.0.1")
       .withHttpApp(endpoints.orNotFound)
       .resource
   }yield server

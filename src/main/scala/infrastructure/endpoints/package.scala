@@ -5,8 +5,8 @@ import io.circe.{Codec, Decoder, Encoder}
 import io.circe.generic.semiauto._
 
 package object endpoints {
-  lazy implicit val shortcutRequestDecoder:Decoder[KeyboardShortcutRequest]=deriveDecoder[KeyboardShortcutRequest]
-  lazy implicit val actionEncoder:Encoder[Action]=deriveEncoder[Action]
-  lazy implicit val shortcutKeyboardEncoder:Encoder[KeyboardShortcut]=deriveEncoder[KeyboardShortcut]
-  lazy implicit val shortcutResponseEncoder:Encoder[ShortcutResponse]=deriveEncoder[ShortcutResponse]
+   lazy implicit val shortcutRequestCodec:Decoder[KeyboardShortcutRequest]=deriveDecoder[KeyboardShortcutRequest]
+  lazy implicit val actionCodec:Codec[Action]=deriveCodec[Action]
+  lazy implicit val shortcutKeyboardCodec:Codec[KeyboardShortcut]=deriveCodec[KeyboardShortcut]
+  lazy implicit val shortcutResponseCodec:Codec[ShortcutResponse]=deriveCodec[ShortcutResponse]
 }

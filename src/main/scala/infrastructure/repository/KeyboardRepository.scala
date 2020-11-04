@@ -17,12 +17,12 @@ class KeyboardRepository[F[_]:Monad](keyboards: Ref[F, Map[String, List[Keyboard
   }
 
   override def findByKeyboards(s: Seq[Shortcut]): F[Option[KeyboardShortcut]] = {
-    keyboards.get.flatMap(map=>map.
+    keyboards.get.flatMap(map=> map.
       find {
         keyValue=>keyValue.
                   exists { list=>list.
                     exists(_.binding.equals(s))
                   }
-      }.flatMap(_._2.find(_.binding.equals(s))).pure)
+      }.flatMap(_._2.find(_.binding.equals(s))).pure[F])
     }
 }

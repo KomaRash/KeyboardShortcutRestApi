@@ -14,11 +14,15 @@ class KeyboardService[F[_]:Monad](repository: KeyboardRepAlgebra[F],
      action <- parse.parseToAction(keyboardShortcutRequest.action)
     }yield (binding,keyboardShortcutRequest.description.asRight,action).
       mapN(KeyboardShortcut)).flatMap{
-      key=>for{
+      key=>
+
+        for{
         _<-EitherT(validation.exist(key.binding))
-        result<-EitherT.liftF(repository.addKeyboards(key))
+        result<-EitherT.liftF[F,ParseError,KeyboardShortcut](repository.addKeyboards(key))
       }yield result
+
     }.value
+
     }
   def getByCategory(category:String): F[List[KeyboardShortcut]] ={
     repository.getByCategory(category)
