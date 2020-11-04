@@ -1,5 +1,5 @@
 package domain.keyboards
 
-class KeyboardService {
+case class ParseError() {
 
 }
